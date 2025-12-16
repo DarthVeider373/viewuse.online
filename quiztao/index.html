@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evaluación Privada • Circulación Masculina</title>
+  <meta name="description" content="Quiz black de 10 etapas sobre circulación masculina y rendimiento íntimo." />
+  <style>
+    :root{
+      --bg:#050507;
+      --card:#0b0b0f;
+      --text:#f5f5f7;
+      --muted:#9a9aa3;
+      --line:rgba(255,255,255,.08);
+      --red:#d90429;
+      --shadow:0 20px 60px rgba(0,0,0,.65);
+      --radius:18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background: radial-gradient(900px 600px at 20% 10%, rgba(217,4,41,.15), transparent 55%), var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:900px;margin:0 auto;padding:28px 16px 70px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    h1{margin:0 0 10px;font-size:clamp(26px,3vw,38px)}
+    .sub{color:var(--muted);margin-bottom:18px}
+    .btn{border:0;border-radius:14px;padding:14px 16px;font-weight:800;cursor:pointer}
+    .btnPrimary{background:linear-gradient(135deg,#ff1e3c,var(--red));color:#070709}
+    .quiz{display:none;padding:18px}
+    .progress{display:flex;gap:10px;align-items:center;margin-bottom:12px}
+    .bar{flex:1;height:10px;border-radius:999px;overflow:hidden;border:1px solid var(--line);background:#111}
+    .fill{height:100%;width:0%;background:linear-gradient(90deg,#ff1e3c,var(--red));transition:.25s}
+    .step{font-size:12px;color:var(--muted)}
+    .q{font-size:17px;margin:10px 0}
+    .options{display:grid;gap:10px}
+    .opt{padding:14px;border-radius:14px;border:1px solid var(--line);background:#0e0e13;color:var(--text);font-weight:700;cursor:pointer}
+    .opt:hover{background:#14141b}
+    .result{display:none;padding:18px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" style="padding:22px">
+      <h1>Evaluación Privada de Circulación Masculina</h1>
+      <p class="sub">10 preguntas confidenciales para identificar qué está bloqueando tu rendimiento íntimo.</p>
+      <button class="btn btnPrimary" id="start">Comenzar evaluación →</button>
+    </div>
+
+    <div class="card quiz" id="quiz">
+      <div class="progress">
+        <div class="bar"><div class="fill" id="fill"></div></div>
+        <div class="step" id="step">1/10</div>
+      </div>
+      <div class="q" id="q"></div>
+      <div class="options" id="opts"></div>
+    </div>
+
+    <div class="card result" id="result"></div>
+  </div>
+
+<script>
+  const CHECKOUT_URL = "COLOQUE_AQUI_SEU_CHECKOUT";
+
+  const quiz = [
+    '¿Has notado pérdida de rigidez con el tiempo?',
+    '¿Tu erección tarda más en aparecer que antes?',
+    '¿Pierdes firmeza durante la relación?',
+    '¿Sientes menor sensibilidad íntima?',
+    '¿Te despiertas con erecciones matutinas?',
+    '¿Consumes alcohol con frecuencia?',
+    '¿Pasas muchas horas sentado por día?',
+    '¿Sientes fatiga o bajo nivel de energía?',
+    '¿Tu circulación general es deficiente (manos/pies fríos)?',
+    '¿Te preocupa que el problema empeore?'
+  ];
+
+  const start=document.getElementById('start');
+  const quizBox=document.getElementById('quiz');
+  const qEl=document.getElementById('q');
+  const opts=document.getElementById('opts');
+  const fill=document.getElementById('fill');
+  const stepEl=document.getElementById('step');
+  const result=document.getElementById('result');
+
+  let step=0;
+
+  function render(){
+    fill.style.width=((step)/quiz.length*100)+'%';
+    stepEl.textContent=`${step+1}/${quiz.length}`;
+    qEl.textContent=quiz[step];
+    opts.innerHTML='';
+    ['Sí','A veces','No'].forEach(()=>{
+      const b=document.createElement('button');
+      b.className='opt';
+      b.textContent=event.target?.textContent || arguments[0];
+    });
+    ['Sí','A veces','No'].forEach(label=>{
+      const b=document.createElement('button');
+      b.className='opt';
+      b.textContent=label;
+      b.onclick=next;
+      opts.appendChild(b);
+    });
+  }
+
+  function next(){
+    if(step<quiz.length-1){step++;render();}
+    else showResult();
+  }
+
+  function showResult(){
+    fill.style.width='100%';
+    quizBox.style.display='none';
+    result.style.display='block';
+    result.innerHTML=`
+      <h2>Resultado confidencial</h2>
+      <p style="color:var(--muted)">
+        Tus respuestas indican que la **circulación sanguínea** puede estar afectando directamente tu rendimiento íntimo.
+        La buena noticia es que este factor puede mejorarse cuando se aplica el enfoque correcto.
+      </p>
+      <p style="margin-top:10px">
+        El método <b>Truco del Oxígeno</b> explica cómo estimular el flujo sanguíneo de forma estratégica,
+        abordando la causa y no solo los síntomas.
+      </p>
+      <a class="btn btnPrimary" href="${CHECKOUT_URL}" target="_blank">Acceder al método completo →</a>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted)">
+        Aviso: contenido educativo. No sustituye orientación médica.
+      </p>
+    `;
+  }
+
+  start.onclick=()=>{quizBox.style.display='block';render();quizBox.scrollIntoView({behavior:'smooth'});};
+</script>
+</body>
+</html>
