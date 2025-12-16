@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video</title>
+
+
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids data-utmify-ignore-iframe data-utmify-is-cartpanda async defer></script>
+
+  <script>
+    window.googlePixelId = "68e3c9c7a2ea0ad818ce7597";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel-google.js");
+    document.head.appendChild(a);
+  </script>
+
+
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --panel: #121214;
+      --text: #f2f2f2;
+      --muted: #cfcfcf;
+      --muted2: #a9a9a9;
+      --link: #ffffff;
+      --dot: #16d45b;
+      --maxw: 900px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    .page {
+      min-height: 100vh;
+      background: var(--bg) !important;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: var(--bg) !important;
+    }
+
+    body {
+      overflow-x: hidden;
+
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 clamp(14px, 4vw, 28px);
+    }
+
+    /* Margen superior proporcional */
+    .top-space {
+      height: clamp(14px, 5vh, 42px);
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #000000;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+      font-weight: 700;
+      letter-spacing: .2px;
+      line-height: 1;
+      width: fit-content;
+      user-select: none;
+    }
+
+    .live-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--dot);
+      box-shadow: 0 0 0 4px rgba(22, 212, 91, .12);
+      flex: 0 0 auto;
+    }
+
+    .live-text {
+      font-size: clamp(14px, 4vw, 18px);
+      white-space: nowrap;
+    }
+
+    .card {
+      margin-top: clamp(14px, 2.8vh, 24px);
+      margin-bottom: clamp(28px, 6vh, 56px);
+      /* espaçamento estético abaixo do vídeo */
+      background: var(--panel);
+      border-radius: 16px;
+      padding: clamp(14px, 3.8vw, 22px);
+      border: 1px solid rgba(255, 255, 255, .06);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+    }
+
+    .hint {
+      margin: 0 0 10px;
+      color: var(--muted2);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    /* Área do vídeo: sem borda, sem texto, apenas fundo */
+    .embed-slot {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      background: #0b0b0c;
+    }
+
+    /* Espacio inferior SOLO en mobile para que no se vea el footer al entrar */
+    .below-live-space {
+      height: 0;
+      /* desktop: sem espaço extra */
+      background: var(--bg);
+    }
+
+    /* espaçamento confortável entre vídeo e footer em todas as telas */
+    .soft-gap {
+      height: clamp(32px, 6vh, 64px);
+      background: var(--bg);
+    }
+
+    @media (max-width: 768px) {
+      .below-live-space {
+        height: clamp(220px, 55vh, 520px);
+        /* mobile only */
+        background: var(--bg);
+      }
+    }
+
+    footer {
+      margin-top: 0;
+      background: #1c1c1d;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      padding: 26px 0 34px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 700;
+      opacity: .95;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .footer-text {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 clamp(14px, 4vw, 28px);
+      text-align: center;
+      color: rgba(255, 255, 255, .85);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .footer-text .muted {
+      color: rgba(255, 255, 255, .72);
+    }
+
+    .footer-text .muted2 {
+      color: rgba(255, 255, 255, .62);
+    }
+
+    .copyright {
+      margin-top: 18px;
+      color: rgba(255, 255, 255, .62);
+      font-weight: 700;
+    }
+
+    /* Ajustes para pantallas muy pequeñas */
+    @media (max-width: 360px) {
+      .live-text {
+        font-size: 13px;
+      }
+
+      .footer-links {
+        gap: 18px;
+      }
+
+      .footer-text {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="wrap">
+      <div class="top-space"></div>
+
+
+
+      <!-- Aquí va el video (Vturb). Sin botón de compra. -->
+      <section class="card">
+
+        <vturb-smartplayer id="vid-69407be9aba852f9cccf1b4a" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"></vturb-smartplayer>
+        <script type="text/javascript"> var s = document.createElement("script"); s.src = "https://scripts.converteai.net/cda0fd17-3b99-44d2-a83a-fc66435cb2df/players/69407be9aba852f9cccf1b4a/v4/player.js", s.async = !0, document.head.appendChild(s); </script>
+
+    </div>
+  </div>
+  </section>
+
+  <!-- Contador centrado debajo del video -->
+  <div style="display:flex; justify-content:center; margin-top:24px;">
+    <div class="live-pill" aria-live="polite">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span class="live-text"><span id="liveCount">719</span> personas están viendo ahora</span>
+    </div>
+  </div>
+
+  <!-- Espacio extra para que en mobile no caiga directo al footer -->
+  <div class="soft-gap" aria-hidden="true"></div>
+  <div class="below-live-space" aria-hidden="true"></div>
+  </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#" onclick="return false;">Términos de Uso</a>
+      <a href="#" onclick="return false;">Privacidad</a>
+    </div>
+
+    <div class="footer-text">
+      <div class="muted">Este sitio no está afiliado a YouTube ni a Google LLC.</div>
+      <div class="muted">No está respaldado ni patrocinado por YouTube de ninguna manera.</div>
+      <div class="muted">YouTube es una marca registrada de Google LLC.</div>
+      <br />
+      <div class="muted">Todo el contenido de este sitio está protegido por leyes de derechos de autor y propiedad intelectual.</div>
+      <div class="muted">La reproducción o distribución de cualquier parte de este sitio sin autorización está prohibida.</div>
+      <br />
+      <div class="muted2">La información proporcionada es solo con fines educativos e informativos. Los resultados individuales pueden variar.</div>
+      <div class="muted2">El contenido ofrecido no sustituye orientación profesional, médica, financiera ni de ningún otro tipo.</div>
+      <div class="muted2">Siempre consulte a un profesional calificado antes de tomar decisiones basadas en la información presentada.</div>
+
+      <div class="copyright">Todos los derechos reservados © <span id="year">2025</span></div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const MIN = 294;
+      const MAX = 896;
+      const el = document.getElementById('liveCount');
+
+      let current = Math.min(MAX, Math.max(MIN, parseInt(el.textContent || '719', 10) || 719));
+      el.textContent = String(current);
+
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+
+      function clamp(n) {
+        return Math.min(MAX, Math.max(MIN, n));
+      }
+
+      function nextValue() {
+        const bigJump = Math.random() < 0.18;
+        const delta = bigJump
+          ? (Math.random() < 0.5 ? -1 : 1) * (30 + Math.floor(Math.random() * 110))
+          : (Math.random() < 0.5 ? -1 : 1) * (5 + Math.floor(Math.random() * 55));
+        return clamp(current + delta);
+      }
+
+      function animateTo(target) {
+        const start = current;
+        const diff = target - start;
+        const duration = 520;
+        const t0 = performance.now();
+
+        function step(t) {
+          const p = Math.min(1, (t - t0) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.round(start + diff * eased);
+          el.textContent = String(val);
+          if (p < 1) requestAnimationFrame(step);
+          else {
+            current = target;
+            el.textContent = String(current);
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      function tick() {
+        const target = nextValue();
+        animateTo(target);
+        const nextIn = 2500 + Math.floor(Math.random() * 4500);
+        setTimeout(tick, nextIn);
+      }
+
+      setTimeout(tick, 1400);
+    })();
+  </script>
+</body>
+
+</html>
